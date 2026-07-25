@@ -48,6 +48,9 @@ jobs:
           install -m 0755 "$RUNNER_TEMP/sfw" "$RUNNER_TEMP/bin/sfw"
           echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
 
+      - name: Install pnpm for the design-system build
+        run: sfw npm install --global pnpm@10.26.2
+
       - name: Install dependencies
         run: sfw npm ci
 
