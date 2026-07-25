@@ -1,0 +1,7 @@
+{
+  "designSystem": {
+    "package": "@baixada-cards/design-system",
+    "repository": "https://github.com/baixada-cards/design-system.git",
+    "revision": "82638b7cdabbb56a4bce7b953e8571847bf6fda9"
+  }
+}
