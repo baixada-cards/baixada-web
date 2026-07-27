@@ -35,9 +35,11 @@ test("server-renders the English Baixada homepage", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>Baixada — card games of the south<\/title>/i);
-  assert.match(html, /A LAB FOR THE CARD GAMES OF THE SOUTH/i);
-  assert.match(html, /Sit at the Truco table/);
-  assert.match(html, /Truco · Lab/);
+  assert.match(html, /A table in the south/i);
+  assert.match(html, /Play Truco/);
+  assert.match(html, /Study the game/);
+  assert.match(html, /This is not a casino\. It is a family table\./);
+  assert.match(html, /Take your seat\./);
   assert.match(html, /Escopa/);
   assert.match(html, /Bisca/);
   assert.match(html, /https:\/\/baixada\.cards\/og\.png/);
@@ -49,10 +51,19 @@ test("server-renders the Portuguese surface", async () => {
   assert.equal(response.status, 200);
 
   const html = await response.text();
-  assert.match(html, /Baixada é um lugar tranquilo/);
-  assert.match(html, /Sentar à mesa de Truco/);
+  assert.match(html, /Uma mesa no sul/);
+  assert.match(html, /Jogar Truco/);
+  assert.match(html, /Isto não é um cassino\. É uma mesa de família\./);
   assert.match(html, /Puxa uma cadeira/);
   assert.match(html, /feito no sul/);
+});
+
+test("ships the photographic hero art direction", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const hero = await readFile(new URL("../public/hero-v2.jpg", import.meta.url));
+
+  assert.match(css, /url\(["']?\/hero-v2\.jpg["']?\)/);
+  assert.ok(hero.byteLength > 100_000, "hero image should not be an empty placeholder");
 });
 
 test("pins the canonical design-system revision", async () => {
