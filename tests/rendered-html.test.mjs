@@ -34,15 +34,20 @@ test("server-renders the English Baixada homepage", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Baixada — card games of the south<\/title>/i);
-  assert.match(html, /A table in the south/i);
+  assert.match(html, /<title>Baixada — play, study, and learn<\/title>/i);
+  assert.match(html, /Play · study · learn/i);
   assert.match(html, /Play Truco/);
-  assert.match(html, /Study the game/);
-  assert.match(html, /This is not a casino\. It is a family table\./);
-  assert.match(html, /Take your seat\./);
+  assert.match(html, /Open the lab/);
+  assert.match(html, /Read the guide/);
+  assert.match(html, /The games\./);
+  assert.match(html, /Why Baixada/);
   assert.match(html, /Escopa/);
   assert.match(html, /Bisca/);
   assert.match(html, /https:\/\/baixada\.cards\/og\.png/);
+  assert.doesNotMatch(
+    html,
+    /games of the south|made in the south|not a casino|take your seat/i,
+  );
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
 });
 
@@ -51,11 +56,26 @@ test("server-renders the Portuguese surface", async () => {
   assert.equal(response.status, 200);
 
   const html = await response.text();
-  assert.match(html, /Uma mesa no sul/);
+  assert.match(html, /Jogar · estudar · aprender/);
   assert.match(html, /Jogar Truco/);
-  assert.match(html, /Isto não é um cassino\. É uma mesa de família\./);
-  assert.match(html, /Puxa uma cadeira/);
-  assert.match(html, /feito no sul/);
+  assert.match(html, /Abrir o laboratório/);
+  assert.match(html, /Ler o guia/);
+  assert.match(html, /Por que Baixada/);
+  assert.doesNotMatch(html, /jogos do sul|feito no sul|cassino|Puxa uma cadeira/i);
+});
+
+test("server-renders the Spanish surface", async () => {
+  const response = await render("/es");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /Jugar · estudiar · aprender/);
+  assert.match(html, /Jugar al Truco/);
+  assert.match(html, /Abrir el laboratorio/);
+  assert.match(html, /Leer la guía/);
+  assert.match(html, /Por qué Baixada/);
+  assert.match(html, /Español/);
+  assert.doesNotMatch(html, /juegos del sur|hecho en el sur|casino/i);
 });
 
 test("ships the photographic hero art direction", async () => {
