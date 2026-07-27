@@ -8,23 +8,24 @@ import {
   type BaixadaSuitKind,
 } from "@baixada-cards/design-system";
 
-type Locale = "en" | "pt-BR";
+export type Locale = "en" | "pt-BR" | "es";
 
 type Copy = {
-  languageName: string;
-  languageHref: string;
+  languageLabel: string;
   navGames: string;
-  navAbout: string;
+  navOrigin: string;
   heroKicker: string;
+  wordmarkTagline: string;
   hero: string;
-  primaryAction: string;
+  playAction: string;
   labAction: string;
-  invitation: string;
+  guideAction: string;
   roomsKicker: string;
   roomsTitle: string;
   roomsIntro: string;
-  soon: string;
-  open: string;
+  available: string;
+  coming: string;
+  openGame: string;
   games: Record<
     BaixadaGameName,
     {
@@ -32,148 +33,229 @@ type Copy = {
       detail: string;
     }
   >;
-  storyKicker: string;
-  storyLead: string;
-  storyBody: string;
-  aboutKicker: string;
-  aboutTitle: string;
-  aboutBody: string;
-  pronunciation: string;
-  madeIn: string;
+  originKicker: string;
+  originBody: string;
 };
 
 const COPY: Record<Locale, Copy> = {
   en: {
-    languageName: "Português",
-    languageHref: "/pt",
+    languageLabel: "Language",
     navGames: "The games",
-    navAbout: "The place",
-    heroKicker: "A table in the south",
+    navOrigin: "Why Baixada",
+    heroKicker: "Play · study · learn",
+    wordmarkTagline: "card games, software, and study",
     hero:
-      "Card games, kept alive around the table—and rebuilt with care for the screen. Truco is open. Escopa and Bisca are next.",
-    primaryAction: "Play Truco",
-    labAction: "Study the game",
-    invitation: "Come in. Someone has already shuffled.",
-    roomsKicker: "Games played after dinner",
-    roomsTitle: "Take your seat.",
-    roomsIntro:
-      "Each game gets its own room. Same table, different conversation.",
-    soon: "The light comes on soon",
-    open: "The table is open",
+      "A home for playing and studying the card games that have become part of my life. Truco paulista is open; Escopa and Bisca come next.",
+    playAction: "Play Truco",
+    labAction: "Open the lab",
+    guideAction: "Read the guide",
+    roomsKicker: "The collection",
+    roomsTitle: "The games.",
+    roomsIntro: "Play what is ready and follow what comes next.",
+    available: "Available now",
+    coming: "In development",
+    openGame: "Open Truco",
     games: {
       Truco: {
         description:
-          "Truco paulista for two. Bluff, raise, and read the person across the table.",
-        detail: "Casual play and a solved study room.",
+          "Truco paulista for two, with casual play and a separate study environment.",
+        detail: "Game, lab, and guide are available.",
       },
       Escopa: {
         description:
-          "Fifteen on the table. Clear it at the right moment and leave nothing behind.",
-        detail: "The next room we are preparing.",
+          "A capture game built around making fifteen and clearing the table.",
+        detail: "The next game in the collection.",
       },
       Bisca: {
         description:
-          "A compact trick-taking game, sharp enough to make a long evening disappear.",
-        detail: "Waiting for a later evening.",
+          "A compact trick-taking game with a small deck and sharp decisions.",
+        detail: "Planned for a later release.",
       },
     },
-    storyKicker: "Where the name comes from",
-    storyLead: "This is not a casino. It is a family table.",
-    storyBody:
-      "Baixada is the name of the farm where these games are actually played: cards softened by use, coffee nearby, and one more hand before everybody leaves. The website keeps that feeling while making room for careful software, study, and new players.",
-    aboutKicker: "A place, not a platform",
-    aboutTitle: "Como estão as coisas lá na baixada?",
-    aboutBody:
-      "That is the old family question: how are things down at Baixada? Our answer is simple. The lamp is on. The cards are on the table. There is room for one more.",
-    pronunciation: "Baixada · bye-SHAH-dah",
-    madeIn: "made in the south",
+    originKicker: "Why Baixada",
+    originBody:
+      "Baixada is the name of my family’s farm in southern Brazil. It is where these games became part of my life, and the name carries that personal history into the project.",
   },
   "pt-BR": {
-    languageName: "English",
-    languageHref: "/",
+    languageLabel: "Idioma",
     navGames: "Os jogos",
-    navAbout: "O lugar",
-    heroKicker: "Uma mesa no sul",
+    navOrigin: "Por que Baixada",
+    heroKicker: "Jogar · estudar · aprender",
+    wordmarkTagline: "jogos de carta, software e estudo",
     hero:
-      "Jogos de carta mantidos vivos em volta da mesa—e refeitos com cuidado para a tela. O Truco está aberto. Escopa e Bisca vêm depois.",
-    primaryAction: "Jogar Truco",
-    labAction: "Estudar o jogo",
-    invitation: "Chega mais. Alguém já embaralhou.",
-    roomsKicker: "Jogos para depois da janta",
-    roomsTitle: "Puxa uma cadeira.",
-    roomsIntro:
-      "Cada jogo ganha sua própria sala. A mesa é a mesma; a conversa muda.",
-    soon: "A luz acende em breve",
-    open: "A mesa está aberta",
+      "Um espaço para jogar e estudar os jogos de carta que fazem parte da minha vida. O truco paulista já está disponível; Escopa e Bisca vêm depois.",
+    playAction: "Jogar Truco",
+    labAction: "Abrir o laboratório",
+    guideAction: "Ler o guia",
+    roomsKicker: "A coleção",
+    roomsTitle: "Os jogos.",
+    roomsIntro: "Jogue o que já está pronto e acompanhe o que vem depois.",
+    available: "Disponível agora",
+    coming: "Em desenvolvimento",
+    openGame: "Abrir o Truco",
     games: {
       Truco: {
         description:
-          "Truco paulista para dois. Blefe, aumente e leia quem está do outro lado.",
-        detail: "Jogo casual e uma sala de estudo resolvida.",
+          "Truco paulista para dois, com jogo casual e um ambiente separado de estudo.",
+        detail: "Jogo, laboratório e guia estão disponíveis.",
       },
       Escopa: {
         description:
-          "Quinze na mesa. Limpe tudo na hora certa e não deixe nada para trás.",
-        detail: "A próxima sala que estamos preparando.",
+          "Um jogo de captura baseado em formar quinze e limpar a mesa.",
+        detail: "O próximo jogo da coleção.",
       },
       Bisca: {
         description:
-          "Um jogo de vazas compacto, afiado o bastante para fazer a noite passar.",
-        detail: "Guardada para outra noite.",
+          "Um jogo de vazas compacto, com poucas cartas e decisões afiadas.",
+        detail: "Planejada para uma versão futura.",
       },
     },
-    storyKicker: "De onde vem o nome",
-    storyLead: "Isto não é um cassino. É uma mesa de família.",
-    storyBody:
-      "Baixada é o nome da fazenda onde esses jogos realmente acontecem: cartas amaciadas pelo uso, café por perto e só mais uma mão antes de todo mundo ir embora. O site guarda esse sentimento e abre espaço para software cuidadoso, estudo e novos jogadores.",
-    aboutKicker: "Um lugar, não uma plataforma",
-    aboutTitle: "Como estão as coisas lá na baixada?",
-    aboutBody:
-      "Essa é a velha pergunta da família. A nossa resposta é simples. A luz está acesa. As cartas estão na mesa. Ainda cabe mais um.",
-    pronunciation: "Baixada · bai-XA-da",
-    madeIn: "feito no sul",
+    originKicker: "Por que Baixada",
+    originBody:
+      "Baixada é o nome da fazenda da minha família no sul do Brasil. Foi lá que esses jogos se tornaram parte da minha vida, e o nome leva essa história pessoal para o projeto.",
+  },
+  es: {
+    languageLabel: "Idioma",
+    navGames: "Los juegos",
+    navOrigin: "Por qué Baixada",
+    heroKicker: "Jugar · estudiar · aprender",
+    wordmarkTagline: "juegos de cartas, software y estudio",
+    hero:
+      "Un espacio para jugar y estudiar los juegos de cartas que forman parte de mi vida. El truco paulista ya está disponible; Escopa y Bisca llegarán después.",
+    playAction: "Jugar al Truco",
+    labAction: "Abrir el laboratorio",
+    guideAction: "Leer la guía",
+    roomsKicker: "La colección",
+    roomsTitle: "Los juegos.",
+    roomsIntro: "Juega a lo que ya está listo y sigue lo que viene.",
+    available: "Disponible ahora",
+    coming: "En desarrollo",
+    openGame: "Abrir Truco",
+    games: {
+      Truco: {
+        description:
+          "Truco paulista para dos, con juego casual y un entorno de estudio separado.",
+        detail: "El juego, el laboratorio y la guía están disponibles.",
+      },
+      Escopa: {
+        description:
+          "Un juego de captura basado en sumar quince y limpiar la mesa.",
+        detail: "El próximo juego de la colección.",
+      },
+      Bisca: {
+        description:
+          "Un juego de bazas compacto, con pocas cartas y decisiones precisas.",
+        detail: "Planeado para una versión futura.",
+      },
+    },
+    originKicker: "Por qué Baixada",
+    originBody:
+      "Baixada es el nombre de la finca de mi familia en el sur de Brasil. Allí estos juegos pasaron a formar parte de mi vida, y el nombre lleva esa historia personal al proyecto.",
   },
 };
+
+const LOCALES: Array<{
+  locale: Locale;
+  href: string;
+  label: string;
+  shortLabel: string;
+}> = [
+  { locale: "en", href: "/", label: "English", shortLabel: "EN" },
+  {
+    locale: "pt-BR",
+    href: "/pt",
+    label: "Português",
+    shortLabel: "PT",
+  },
+  { locale: "es", href: "/es", label: "Español", shortLabel: "ES" },
+];
 
 const ROOMS: Array<{
   game: BaixadaGameName;
   suit: BaixadaSuitKind;
   className: string;
   order: string;
-  href?: string;
+  available: boolean;
 }> = [
   {
     game: "Truco",
     suit: "copas",
     className: "room--truco",
     order: "01",
-    href: "https://truco.baixada.cards/",
+    available: true,
   },
   {
     game: "Escopa",
     suit: "bastos",
     className: "room--escopa",
     order: "02",
+    available: false,
   },
   {
     game: "Bisca",
     suit: "oros",
     className: "room--bisca",
     order: "03",
+    available: false,
   },
 ];
+
+function LanguageMenu({ locale, copy }: { locale: Locale; copy: Copy }) {
+  const current =
+    LOCALES.find((option) => option.locale === locale) ?? LOCALES[0];
+
+  return (
+    <details className="language-menu">
+      <summary
+        aria-label={`${copy.languageLabel}: ${current.label}`}
+        title={copy.languageLabel}
+      >
+        <span className="language-menu__long">{current.label}</span>
+        <span className="language-menu__short">{current.shortLabel}</span>
+        <span className="language-menu__chevron" aria-hidden="true">
+          ⌄
+        </span>
+      </summary>
+      <div className="language-menu__options">
+        {LOCALES.map((option) =>
+          option.locale === locale ? (
+            <span
+              className="language-menu__option language-menu__option--current"
+              aria-current="page"
+              key={option.locale}
+              lang={option.locale}
+            >
+              {option.label}
+              <span aria-hidden="true">●</span>
+            </span>
+          ) : (
+            <a
+              className="language-menu__option"
+              href={option.href}
+              hrefLang={option.locale}
+              key={option.locale}
+              lang={option.locale}
+            >
+              {option.label}
+            </a>
+          ),
+        )}
+      </div>
+    </details>
+  );
+}
 
 function GameRoom({
   room,
   copy,
+  trucoLocale,
 }: {
   room: (typeof ROOMS)[number];
   copy: Copy;
+  trucoLocale: Locale;
 }) {
   const content = (
     <>
-      {room.href ? <span className="room__photograph" aria-hidden="true" /> : null}
-      <span className="room__wash" aria-hidden="true" />
       <div className="room__top">
         <span>{room.order}</span>
         <SuitGlyph kind={room.suit} size={20} />
@@ -187,25 +269,40 @@ function GameRoom({
         <p>{copy.games[room.game].description}</p>
       </div>
       <div className="room__foot">
-        <span className="room__status">{room.href ? copy.open : copy.soon}</span>
+        <span className="room__status">
+          {room.available ? copy.available : copy.coming}
+        </span>
         <span>{copy.games[room.game].detail}</span>
-        {room.href ? <span className="room__arrow" aria-hidden="true">↗</span> : null}
+        <span
+          className={`room__action${room.available ? "" : " room__action--disabled"}`}
+        >
+          {room.available ? copy.openGame : copy.coming}
+          {room.available ? <span aria-hidden="true">↗</span> : null}
+        </span>
       </div>
     </>
   );
 
-  return room.href ? (
-    <a className={`room ${room.className}`} href={room.href}>
+  return room.available ? (
+    <a
+      className={`room ${room.className}`}
+      href={`https://truco.baixada.cards/${trucoLocale}`}
+    >
       {content}
     </a>
   ) : (
-    <article className={`room ${room.className}`}>{content}</article>
+    <article
+      className={`room room--unavailable ${room.className}`}
+      aria-label={`${room.game}: ${copy.coming}`}
+    >
+      {content}
+    </article>
   );
 }
 
 export function BaixadaHome({ locale }: { locale: Locale }) {
   const copy = COPY[locale];
-  const trucoLocale = locale === "pt-BR" ? "pt-BR" : "en";
+  const trucoLocale = locale;
 
   return (
     <main className="site-shell" lang={locale}>
@@ -213,20 +310,17 @@ export function BaixadaHome({ locale }: { locale: Locale }) {
         <div className="hero__photograph" aria-hidden="true" />
         <div className="hero__shade" aria-hidden="true" />
 
-        <header className="site-nav" aria-label="Main navigation">
-          <a className="nav-stamp" href="#top" aria-label="Baixada home">
-            <BaixadaStamp />
-          </a>
-          <nav className="nav-links">
-            <a href="#games">{copy.navGames}</a>
-            <a href="#about">{copy.navAbout}</a>
-            <a
-              href={copy.languageHref}
-              hrefLang={locale === "en" ? "pt-BR" : "en"}
-            >
-              {copy.languageName}
+        <header className="site-nav">
+          <div className="site-nav__inner">
+            <a className="nav-stamp" href="#top" aria-label="Baixada home">
+              <BaixadaStamp />
             </a>
-          </nav>
+            <nav className="nav-links" aria-label="Main navigation">
+              <a href="#games">{copy.navGames}</a>
+              <a href="#origin">{copy.navOrigin}</a>
+              <LanguageMenu locale={locale} copy={copy} />
+            </nav>
+          </div>
         </header>
 
         <div className="hero__content">
@@ -234,14 +328,18 @@ export function BaixadaHome({ locale }: { locale: Locale }) {
           <h1 className="visually-hidden" id="hero-title">
             Baixada
           </h1>
-          <BaixadaWordmark dark className="hero__wordmark" />
+          <BaixadaWordmark
+            dark
+            tagline={copy.wordmarkTagline}
+            className="hero__wordmark"
+          />
           <p className="hero__copy">{copy.hero}</p>
           <div className="hero__actions">
             <a
               className="button button--primary"
               href={`https://truco.baixada.cards/${trucoLocale}`}
             >
-              {copy.primaryAction}
+              {copy.playAction}
               <span aria-hidden="true">↗</span>
             </a>
             <a
@@ -250,27 +348,13 @@ export function BaixadaHome({ locale }: { locale: Locale }) {
             >
               {copy.labAction}
             </a>
+            <a
+              className="button button--secondary"
+              href={`https://truco.baixada.cards/${trucoLocale}/lab/study/guide`}
+            >
+              {copy.guideAction}
+            </a>
           </div>
-          <p className="hero__invitation">{copy.invitation}</p>
-        </div>
-
-        <a className="hero__scroll" href="#story">
-          <span>{copy.storyKicker}</span>
-          <i aria-hidden="true">↓</i>
-        </a>
-      </section>
-
-      <section className="story" id="story" aria-labelledby="story-title">
-        <div className="story__aside">
-          <SuitRow size={16} gap={14} color="var(--brass-0)" />
-          <p className="kicker">{copy.storyKicker}</p>
-        </div>
-        <div className="story__content">
-          <h2 id="story-title">{copy.storyLead}</h2>
-          <p>{copy.storyBody}</p>
-        </div>
-        <div className="story__stamp" aria-hidden="true">
-          <BaixadaStamp />
         </div>
       </section>
 
@@ -284,39 +368,30 @@ export function BaixadaHome({ locale }: { locale: Locale }) {
         </div>
         <div className="room-grid">
           {ROOMS.map((room) => (
-            <GameRoom key={room.game} room={room} copy={copy} />
+            <GameRoom
+              key={room.game}
+              room={room}
+              copy={copy}
+              trucoLocale={trucoLocale}
+            />
           ))}
         </div>
       </section>
 
-      <section className="about" id="about" aria-labelledby="about-title">
-        <div className="about__ornament" aria-hidden="true">
-          <span>B</span>
+      <section className="origin" id="origin" aria-labelledby="origin-title">
+        <div className="origin__mark" aria-hidden="true">
+          <BaixadaStamp />
         </div>
-        <div className="about__heading">
-          <p className="kicker">{copy.aboutKicker}</p>
-          <h2 id="about-title">{copy.aboutTitle}</h2>
-        </div>
-        <div className="about__copy">
-          <p>{copy.aboutBody}</p>
-          <p className="pronunciation">{copy.pronunciation}</p>
-        </div>
+        <p className="kicker" id="origin-title">
+          {copy.originKicker}
+        </p>
+        <p className="origin__body">{copy.originBody}</p>
       </section>
 
       <footer className="site-footer">
         <SuitRow size={15} gap={12} color="var(--brass-0)" />
-        <p>
-          Baixada · est. 2026 · {copy.madeIn}
-        </p>
-        <div className="footer-links">
-          <a href="https://github.com/baixada-cards">GitHub</a>
-          <a
-            href={copy.languageHref}
-            hrefLang={locale === "en" ? "pt-BR" : "en"}
-          >
-            {copy.languageName}
-          </a>
-        </div>
+        <p>Baixada · est. 2026</p>
+        <a href="https://github.com/baixada-cards">GitHub</a>
       </footer>
     </main>
   );

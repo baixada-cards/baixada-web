@@ -51,9 +51,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     metadataBase: base,
-    title: "Baixada — card games of the south",
+    title: "Baixada — play, study, and learn",
     description:
-      "A quiet home for Truco, Escopa, Bisca, and a lab for studying the games of the south.",
+      "A home for playing and studying Truco, Escopa, and Bisca.",
     icons: {
       icon: "/favicon.png",
       apple: "/apple-touch-icon.png",
@@ -61,14 +61,21 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: "website",
       siteName: "Baixada",
-      title: "Baixada — card games of the south",
-      description: "A quiet home for the card games of the south.",
-      images: [{ url: image, width: 1200, height: 630, alt: "Baixada" }],
+      title: "Baixada — play, study, and learn",
+      description: "A home for playing and studying card games.",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: "Cards on a worn wooden table under warm lamplight",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Baixada — card games of the south",
-      description: "A quiet home for the card games of the south.",
+      title: "Baixada — play, study, and learn",
+      description: "A home for playing and studying card games.",
       images: [image],
     },
   };
