@@ -24,7 +24,7 @@ const COPY: Record<Locale, Copy> = {
     navLab: "Laboratory",
     navGuide: "Guide",
     heroKicker: "Heads-up truco paulista",
-    wordmarkTagline: "card games and counterfactual-regret minimization",
+    wordmarkTagline: "card games and optimal play",
     hero:
       "A laboratory specialized in heads-up truco paulista (more games to come).",
     playAction: "Play Truco",
@@ -36,8 +36,7 @@ const COPY: Record<Locale, Copy> = {
     navLab: "Laboratório",
     navGuide: "Guia",
     heroKicker: "Truco paulista para dois",
-    wordmarkTagline:
-      "jogos de carta e minimização de arrependimento contrafactual",
+    wordmarkTagline: "jogos de carta e estratégia ótima",
     hero:
       "Um laboratório especializado em truco paulista para dois jogadores (mais jogos em breve).",
     playAction: "Jogar Truco",
@@ -49,8 +48,7 @@ const COPY: Record<Locale, Copy> = {
     navLab: "Laboratorio",
     navGuide: "Guía",
     heroKicker: "Truco paulista mano a mano",
-    wordmarkTagline:
-      "juegos de cartas y minimización del arrepentimiento contrafactual",
+    wordmarkTagline: "juegos de cartas y estrategia óptima",
     hero:
       "Un laboratorio especializado en truco paulista mano a mano (más juegos próximamente).",
     playAction: "Jugar al Truco",
