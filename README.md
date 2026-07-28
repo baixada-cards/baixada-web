@@ -1,14 +1,12 @@
 # Baixada web
 
-The umbrella homepage for [baixada.cards](https://baixada.cards): a home for
-playing, studying, and learning about card games.
+The umbrella homepage for [baixada.cards](https://baixada.cards): a laboratory
+specialized in heads-up truco paulista.
 
 The site is intentionally separate from the individual game applications. It
-introduces Baixada, links to the live Truco game, lab, and guide, and gives
-Escopa and Bisca explicit future states without pretending they have shipped.
-The name comes from the family farm where these games became part of the
-project creator's life; it is not a claim about the games' geographic origins
-or where the software is made.
+introduces Baixada and links to the Truco laboratory, guide, and playable game.
+The laboratory and guide are the project's primary contribution; the playable
+game is available as a supporting surface. More games may be added later.
 
 ## Development
 
@@ -31,11 +29,9 @@ The Baixada visual system is consumed from the exact public
 - `/pt` — Portuguese (Brazil)
 - `/es` — Spanish
 
-The game applications remain on their own subdomains:
+Game applications remain on their own subdomains:
 
 - `truco.baixada.cards`
-- `escopa.baixada.cards` — planned
-- `bisca.baixada.cards` — planned
 
 ## Deployment
 
