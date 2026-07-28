@@ -51,9 +51,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     metadataBase: base,
-    title: "Baixada — play, study, and learn",
+    title: "Baixada — heads-up truco paulista laboratory",
     description:
-      "A home for playing and studying Truco, Escopa, and Bisca.",
+      "A laboratory specialized in heads-up truco paulista, with tools for play, study, and counterfactual-regret minimization.",
     icons: {
       icon: "/favicon.png",
       apple: "/apple-touch-icon.png",
@@ -61,8 +61,9 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: "website",
       siteName: "Baixada",
-      title: "Baixada — play, study, and learn",
-      description: "A home for playing and studying card games.",
+      title: "Baixada — heads-up truco paulista laboratory",
+      description:
+        "A laboratory specialized in heads-up truco paulista, with tools for play, study, and counterfactual-regret minimization.",
       images: [
         {
           url: image,
@@ -74,8 +75,9 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Baixada — play, study, and learn",
-      description: "A home for playing and studying card games.",
+      title: "Baixada — heads-up truco paulista laboratory",
+      description:
+        "A laboratory specialized in heads-up truco paulista, with tools for play, study, and counterfactual-regret minimization.",
       images: [image],
     },
   };

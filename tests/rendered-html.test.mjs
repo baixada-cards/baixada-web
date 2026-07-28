@@ -34,19 +34,27 @@ test("server-renders the English Baixada homepage", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Baixada — play, study, and learn<\/title>/i);
-  assert.match(html, /Play · study · learn/i);
+  assert.match(
+    html,
+    /<title>Baixada — heads-up truco paulista laboratory<\/title>/i,
+  );
+  assert.match(html, /Heads-up truco paulista/i);
+  assert.match(
+    html,
+    /card games and counterfactual-regret minimization/i,
+  );
+  assert.match(
+    html,
+    /A laboratory specialized in heads-up truco paulista \(more games to come\)\./i,
+  );
   assert.match(html, /Play Truco/);
   assert.match(html, /Open the lab/);
   assert.match(html, /Read the guide/);
-  assert.match(html, /The games\./);
-  assert.match(html, /Why Baixada/);
-  assert.match(html, /Escopa/);
-  assert.match(html, /Bisca/);
+  assert.match(html, /https:\/\/truco\.baixada\.cards\/en\/lab\/study/);
   assert.match(html, /https:\/\/baixada\.cards\/og\.png/);
   assert.doesNotMatch(
     html,
-    /games of the south|made in the south|not a casino|take your seat/i,
+    /The games|Why Baixada|Escopa|Bisca|games of the south|made in the south|not a casino|take your seat/i,
   );
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
 });
@@ -56,12 +64,22 @@ test("server-renders the Portuguese surface", async () => {
   assert.equal(response.status, 200);
 
   const html = await response.text();
-  assert.match(html, /Jogar · estudar · aprender/);
+  assert.match(html, /Truco paulista para dois/);
+  assert.match(
+    html,
+    /jogos de carta e minimização de arrependimento contrafactual/i,
+  );
+  assert.match(
+    html,
+    /Um laboratório especializado em truco paulista para dois jogadores \(mais jogos em breve\)\./i,
+  );
   assert.match(html, /Jogar Truco/);
   assert.match(html, /Abrir o laboratório/);
   assert.match(html, /Ler o guia/);
-  assert.match(html, /Por que Baixada/);
-  assert.doesNotMatch(html, /jogos do sul|feito no sul|cassino|Puxa uma cadeira/i);
+  assert.doesNotMatch(
+    html,
+    /Os jogos|Por que Baixada|Escopa|Bisca|jogos do sul|feito no sul|cassino|Puxa uma cadeira/i,
+  );
 });
 
 test("server-renders the Spanish surface", async () => {
@@ -69,13 +87,23 @@ test("server-renders the Spanish surface", async () => {
   assert.equal(response.status, 200);
 
   const html = await response.text();
-  assert.match(html, /Jugar · estudiar · aprender/);
+  assert.match(html, /Truco paulista mano a mano/);
+  assert.match(
+    html,
+    /juegos de cartas y minimización del arrepentimiento contrafactual/i,
+  );
+  assert.match(
+    html,
+    /Un laboratorio especializado en truco paulista mano a mano \(más juegos próximamente\)\./i,
+  );
   assert.match(html, /Jugar al Truco/);
   assert.match(html, /Abrir el laboratorio/);
   assert.match(html, /Leer la guía/);
-  assert.match(html, /Por qué Baixada/);
   assert.match(html, /Español/);
-  assert.doesNotMatch(html, /juegos del sur|hecho en el sur|casino/i);
+  assert.doesNotMatch(
+    html,
+    /Los juegos|Por qué Baixada|Escopa|Bisca|juegos del sur|hecho en el sur|casino/i,
+  );
 });
 
 test("ships the photographic hero art direction", async () => {
