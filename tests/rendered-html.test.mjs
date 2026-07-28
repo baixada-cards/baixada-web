@@ -121,6 +121,6 @@ test("pins the canonical design-system revision", async () => {
   );
   assert.match(
     packageJson,
-    /baixada-cards\/design-system#82638b7cdabbb56a4bce7b953e8571847bf6fda9/,
+    /github\.com\/baixada-cards\/design-system\.git#82638b7cdabbb56a4bce7b953e8571847bf6fda9/,
   );
 });

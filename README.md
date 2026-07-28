@@ -35,8 +35,12 @@ Game applications remain on their own subdomains:
 
 ## Deployment
 
-`.openai/hosting.json` defines the Cloudflare-compatible Sites surface. The
-current `chatgpt.site` deployment is owner-only behind Sign in with ChatGPT.
-The application does not require persistent storage or runtime secrets. Public
-access and a future `baixada.cards` custom-domain cutover are separate
-decisions.
+The public homepage runs as the `baixada-web` Cloud Run service in the private
+Baixada production project. A manual-only GitHub Actions workflow builds an
+immutable container image from exact `main`, deploys it with zero minimum and
+one maximum instance, smoke-tests every public locale, and rolls traffic back
+to the previous revision if that check fails. The service has no persistent
+storage or runtime secrets.
+
+`.openai/hosting.json` remains the source of truth for a separate, owner-only
+`chatgpt.site` design preview. It is not the public `baixada.cards` origin.
