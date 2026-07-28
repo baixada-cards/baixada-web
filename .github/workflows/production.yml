@@ -165,7 +165,7 @@ jobs:
             --execution-environment gen1 \
             --cpu 0.25 \
             --memory 512Mi \
-            --concurrency 10 \
+            --concurrency 1 \
             --cpu-throttling \
             --no-cpu-boost \
             --min 0 \
