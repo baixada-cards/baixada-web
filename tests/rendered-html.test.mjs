@@ -41,7 +41,7 @@ test("server-renders the English Baixada homepage", async () => {
   assert.match(html, /Heads-up truco paulista/i);
   assert.match(
     html,
-    /card games and counterfactual-regret minimization/i,
+    /card games and optimal play/i,
   );
   assert.match(
     html,
@@ -67,7 +67,7 @@ test("server-renders the Portuguese surface", async () => {
   assert.match(html, /Truco paulista para dois/);
   assert.match(
     html,
-    /jogos de carta e minimização de arrependimento contrafactual/i,
+    /jogos de carta e estratégia ótima/i,
   );
   assert.match(
     html,
@@ -90,7 +90,7 @@ test("server-renders the Spanish surface", async () => {
   assert.match(html, /Truco paulista mano a mano/);
   assert.match(
     html,
-    /juegos de cartas y minimización del arrepentimiento contrafactual/i,
+    /juegos de cartas y estrategia óptima/i,
   );
   assert.match(
     html,
