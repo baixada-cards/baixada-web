@@ -1,0 +1,202 @@
+name: Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: Deploy after verification (defaults to a safe dry run)
+        required: true
+        type: boolean
+        default: false
+      reason:
+        description: Reason for this production verification or deployment
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+env:
+  CI: "true"
+
+jobs:
+  verify:
+    name: Verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Require the exact protected main revision
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)"
+          test "$GITHUB_SHA" = "$(git rev-parse origin/main)"
+
+      - name: Check passing CI for the exact main revision
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          deploy_sha="$(git rev-parse HEAD)"
+          conclusion="$(
+            gh run list \
+              --repo "$GITHUB_REPOSITORY" \
+              --workflow ci.yml \
+              --commit "$deploy_sha" \
+              --branch main \
+              --event push \
+              --limit 10 \
+              --json conclusion,createdAt \
+              --jq 'sort_by(.createdAt) | last | .conclusion'
+          )"
+          test "$conclusion" = success
+          echo "DEPLOY_SHA=$deploy_sha" >> "$GITHUB_ENV"
+
+  deploy:
+    name: Deploy
+    if: ${{ inputs.deploy }}
+    needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment:
+      name: production
+      url: https://baixada.cards
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    env:
+      GCP_PROJECT_ID: ${{ secrets.BAIXADA_GCP_PROJECT_ID }}
+      GCP_REGION: us-west1
+      GCP_ARTIFACT_REPOSITORY: containers
+      WEB_SERVICE: baixada-web
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Require the exact protected main revision
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          deploy_sha="$(git rev-parse HEAD)"
+          test "$deploy_sha" = "$(git rev-parse origin/main)"
+          test "$GITHUB_SHA" = "$deploy_sha"
+          echo "DEPLOY_SHA=$deploy_sha" >> "$GITHUB_ENV"
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
+        with:
+          workload_identity_provider: ${{ secrets.BAIXADA_GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.BAIXADA_GCP_SERVICE_ACCOUNT }}
+          project_id: ${{ secrets.BAIXADA_GCP_PROJECT_ID }}
+
+      - name: Set up Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
+        with:
+          version: 575.0.1
+
+      - name: Build and push immutable image
+        run: |
+          set -euo pipefail
+          registry="${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/${GCP_ARTIFACT_REPOSITORY}"
+          image_tag="${registry}/${WEB_SERVICE}:${DEPLOY_SHA}"
+
+          gcloud auth configure-docker "${GCP_REGION}-docker.pkg.dev" --quiet
+          docker buildx build \
+            --platform linux/amd64 \
+            --push \
+            --tag "$image_tag" \
+            .
+
+          digest="$(
+            gcloud artifacts docker images describe "$image_tag" \
+              --format='value(image_summary.digest)'
+          )"
+          test -n "$digest"
+          echo "WEB_IMAGE=${registry}/${WEB_SERVICE}@${digest}" >> "$GITHUB_ENV"
+
+      - name: Deploy, smoke-test, and roll back on failure
+        run: |
+          set -euo pipefail
+
+          previous_revision="$(
+            gcloud run services describe "$WEB_SERVICE" \
+              --project "$GCP_PROJECT_ID" \
+              --region "$GCP_REGION" \
+              --format=json 2>/dev/null |
+              jq -r '[.status.traffic[]? | select(.percent == 100)][0].revisionName // empty' || true
+          )"
+
+          rollback() {
+            exit_code=$?
+            trap - ERR
+            if [ -n "$previous_revision" ]; then
+              gcloud run services update-traffic "$WEB_SERVICE" \
+                --project "$GCP_PROJECT_ID" \
+                --region "$GCP_REGION" \
+                --to-revisions="${previous_revision}=100" \
+                --quiet || true
+            fi
+            exit "$exit_code"
+          }
+          trap rollback ERR
+
+          gcloud run deploy "$WEB_SERVICE" \
+            --project "$GCP_PROJECT_ID" \
+            --region "$GCP_REGION" \
+            --image "$WEB_IMAGE" \
+            --service-account "baixada-web-runtime@${GCP_PROJECT_ID}.iam.gserviceaccount.com" \
+            --execution-environment gen1 \
+            --cpu 0.25 \
+            --memory 512Mi \
+            --concurrency 10 \
+            --cpu-throttling \
+            --no-cpu-boost \
+            --min 0 \
+            --max 1 \
+            --min-instances 0 \
+            --max-instances 1 \
+            --timeout 30s \
+            --port 8080 \
+            --ingress all \
+            --no-session-affinity \
+            --allow-unauthenticated \
+            --set-env-vars "NODE_ENV=production" \
+            --labels "baixada-component=homepage,baixada-stack=${DEPLOY_SHA}" \
+            --quiet
+
+          web_url="$(
+            gcloud run services describe "$WEB_SERVICE" \
+              --project "$GCP_PROJECT_ID" \
+              --region "$GCP_REGION" \
+              --format='value(status.url)'
+          )"
+          test -n "$web_url"
+
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent --show-error --location "$web_url/" | grep --quiet 'heads-up truco paulista'; then
+              break
+            fi
+            test "$attempt" -lt 30
+            sleep 2
+          done
+
+          curl --fail --silent --show-error --location "$web_url/pt" | grep --quiet 'truco paulista'
+          curl --fail --silent --show-error --location "$web_url/es" | grep --quiet 'truco paulista'
+          echo "WEB_URL=$web_url" >> "$GITHUB_ENV"
