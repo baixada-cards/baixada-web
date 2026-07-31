@@ -45,7 +45,7 @@ test("server-renders the English Baixada homepage", async () => {
   );
   assert.match(
     html,
-    /A laboratory specialized in heads-up truco paulista \(more games to come\)\./i,
+    /Play the game\. Study its equilibrium\./i,
   );
   assert.match(html, /Play Truco/);
   assert.match(html, /Open the lab/);
@@ -71,7 +71,7 @@ test("server-renders the Portuguese surface", async () => {
   );
   assert.match(
     html,
-    /Um laboratório especializado em truco paulista para dois jogadores \(mais jogos em breve\)\./i,
+    /Jogue\. Estude o equilíbrio\./i,
   );
   assert.match(html, /Jogar Truco/);
   assert.match(html, /Abrir o laboratório/);
@@ -94,7 +94,7 @@ test("server-renders the Spanish surface", async () => {
   );
   assert.match(
     html,
-    /Un laboratorio especializado en truco paulista mano a mano \(más juegos próximamente\)\./i,
+    /Juega\. Estudia el equilibrio\./i,
   );
   assert.match(html, /Jugar al Truco/);
   assert.match(html, /Abrir el laboratorio/);

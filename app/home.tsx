@@ -25,8 +25,7 @@ const COPY: Record<Locale, Copy> = {
     navGuide: "Guide",
     heroKicker: "Heads-up truco paulista",
     wordmarkTagline: "card games and optimal play",
-    hero:
-      "A laboratory specialized in heads-up truco paulista (more games to come).",
+    hero: "Play the game. Study its equilibrium.",
     playAction: "Play Truco",
     labAction: "Open the lab",
     guideAction: "Read the guide",
@@ -37,8 +36,7 @@ const COPY: Record<Locale, Copy> = {
     navGuide: "Guia",
     heroKicker: "Truco paulista para dois",
     wordmarkTagline: "jogos de carta e estratégia ótima",
-    hero:
-      "Um laboratório especializado em truco paulista para dois jogadores (mais jogos em breve).",
+    hero: "Jogue. Estude o equilíbrio.",
     playAction: "Jogar Truco",
     labAction: "Abrir o laboratório",
     guideAction: "Ler o guia",
@@ -49,8 +47,7 @@ const COPY: Record<Locale, Copy> = {
     navGuide: "Guía",
     heroKicker: "Truco paulista mano a mano",
     wordmarkTagline: "juegos de cartas y estrategia óptima",
-    hero:
-      "Un laboratorio especializado en truco paulista mano a mano (más juegos próximamente).",
+    hero: "Juega. Estudia el equilibrio.",
     playAction: "Jugar al Truco",
     labAction: "Abrir el laboratorio",
     guideAction: "Leer la guía",
