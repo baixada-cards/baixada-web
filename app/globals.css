@@ -377,7 +377,13 @@ a.language-menu__option:focus-visible {
   text-align: center;
 }
 
-.site-footer > a {
+.site-footer__links {
+  display: flex;
+  justify-self: end;
+  gap: 18px;
+}
+
+.site-footer__links > a {
   justify-self: end;
   color: var(--paper-0);
   font-size: 11px;
@@ -511,7 +517,7 @@ a.language-menu__option:focus-visible {
     flex-direction: column;
   }
 
-  .site-footer > a {
+  .site-footer__links {
     justify-self: auto;
   }
 }

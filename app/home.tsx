@@ -10,6 +10,7 @@ type Copy = {
   languageLabel: string;
   navLab: string;
   navGuide: string;
+  contactAction: string;
   heroKicker: string;
   wordmarkTagline: string;
   hero: string;
@@ -23,6 +24,7 @@ const COPY: Record<Locale, Copy> = {
     languageLabel: "Language",
     navLab: "Laboratory",
     navGuide: "Guide",
+    contactAction: "Contact",
     heroKicker: "Heads-up truco paulista",
     wordmarkTagline: "card games and optimal play",
     hero:
@@ -35,6 +37,7 @@ const COPY: Record<Locale, Copy> = {
     languageLabel: "Idioma",
     navLab: "Laboratório",
     navGuide: "Guia",
+    contactAction: "Contato",
     heroKicker: "Truco paulista para dois",
     wordmarkTagline: "jogos de carta e estratégia ótima",
     hero:
@@ -47,6 +50,7 @@ const COPY: Record<Locale, Copy> = {
     languageLabel: "Idioma",
     navLab: "Laboratorio",
     navGuide: "Guía",
+    contactAction: "Contacto",
     heroKicker: "Truco paulista mano a mano",
     wordmarkTagline: "juegos de cartas y estrategia óptima",
     hero:
@@ -177,7 +181,10 @@ export function BaixadaHome({ locale }: { locale: Locale }) {
       <footer className="site-footer">
         <SuitRow size={14} gap={11} color="var(--brass-0)" />
         <p>Baixada · est. 2026</p>
-        <a href="https://github.com/baixada-cards">GitHub</a>
+        <div className="site-footer__links">
+          <a href="mailto:hello@baixada.cards">{copy.contactAction}</a>
+          <a href="https://github.com/baixada-cards">GitHub</a>
+        </div>
       </footer>
     </main>
   );

@@ -50,6 +50,8 @@ test("server-renders the English Baixada homepage", async () => {
   assert.match(html, /Play Truco/);
   assert.match(html, /Open the lab/);
   assert.match(html, /Read the guide/);
+  assert.match(html, /mailto:hello@baixada\.cards/);
+  assert.match(html, />Contact</);
   assert.match(html, /https:\/\/truco\.baixada\.cards\/en\/lab\/study/);
   assert.match(html, /https:\/\/baixada\.cards\/og\.png/);
   assert.doesNotMatch(
@@ -76,6 +78,7 @@ test("server-renders the Portuguese surface", async () => {
   assert.match(html, /Jogar Truco/);
   assert.match(html, /Abrir o laboratório/);
   assert.match(html, /Ler o guia/);
+  assert.match(html, />Contato</);
   assert.doesNotMatch(
     html,
     /Os jogos|Por que Baixada|Escopa|Bisca|jogos do sul|feito no sul|cassino|Puxa uma cadeira/i,
@@ -99,6 +102,7 @@ test("server-renders the Spanish surface", async () => {
   assert.match(html, /Jugar al Truco/);
   assert.match(html, /Abrir el laboratorio/);
   assert.match(html, /Leer la guía/);
+  assert.match(html, />Contacto</);
   assert.match(html, /Español/);
   assert.doesNotMatch(
     html,
