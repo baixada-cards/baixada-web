@@ -13,7 +13,8 @@ game is available as a supporting surface. More games may be added later.
 Requirements: Node.js 22.13 or newer.
 
 ```bash
-npm ci
+sfw npm install --global npm@11.19.1
+sfw npm ci
 npm run dev -- --port 3005
 npm run build
 npm test

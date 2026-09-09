@@ -10,7 +10,7 @@ RUN apt-get update \
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json .npmrc ./
 
 # Keep public-registry installs behind Socket Firewall, as in CI. The exact
 # public design-system revision is fetched over HTTPS, never with an SSH key.
@@ -19,6 +19,9 @@ RUN curl --fail --location --proto '=https' --tlsv1.2 \
       --output /usr/local/bin/sfw \
   && echo '4dc46b626a7c5b81c0b54e1984ee53be5a628dbfb2f55ab14e9b04c8a134db6a  /usr/local/bin/sfw' | sha256sum --check - \
   && chmod 0755 /usr/local/bin/sfw \
+  && sfw npm install --global npm@11.19.1 \
+  && test "$(sfw npm --version)" = "11.19.1" \
+  && test "$(sfw npm config get min-release-age)" = "7" \
   && corepack enable \
   && sfw npm ci
 
