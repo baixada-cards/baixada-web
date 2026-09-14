@@ -10,7 +10,9 @@ game is available as a supporting surface. More games may be added later.
 
 ## Development
 
-Requirements: Node.js 22.13 or newer.
+Requirements: Node.js 22.13 or newer and npm 11.19.0 or newer. Dependabot
+currently uses npm 11.19.0, which supports the seven-day release-age policy.
+Development, CI and container builds pin npm 11.19.1.
 
 ```bash
 sfw npm install --global npm@11.19.1
