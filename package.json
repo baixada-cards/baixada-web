@@ -18,25 +18,25 @@
   },
   "dependencies": {
     "@baixada-cards/design-system": "git+https://github.com/baixada-cards/design-system.git#82638b7cdabbb56a4bce7b953e8571847bf6fda9",
-    "next": "16.3.3",
+    "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.54.2",
+    "@cloudflare/vite-plugin": "1.54.5",
     "@eslint/js": "10.0.1",
     "@types/node": "22.20.1",
     "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.5",
+    "@types/react-dom": "19.2.7",
     "@vitejs/plugin-react": "6.1.1",
     "@vitejs/plugin-rsc": "0.5.34",
-    "eslint": "10.9.1",
+    "eslint": "10.10.0",
     "react-server-dom-webpack": "19.2.8",
     "typescript": "5.9.3",
-    "vinext": "1.0.0-beta.8",
-    "typescript-eslint": "8.68.0",
+    "typescript-eslint": "8.69.0",
+    "vinext": "1.0.0-beta.9",
     "vite": "8.2.2",
-    "wrangler": "4.127.1"
+    "wrangler": "4.129.1"
   },
   "overrides": {
     "nanoid": "3.3.18",
