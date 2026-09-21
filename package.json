@@ -20,14 +20,14 @@
     "@baixada-cards/design-system": "git+https://github.com/baixada-cards/design-system.git#82638b7cdabbb56a4bce7b953e8571847bf6fda9",
     "next": "16.3.4",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.54.5",
     "@eslint/js": "10.0.1",
     "@types/node": "22.20.1",
     "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.7",
+    "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.1",
     "@vitejs/plugin-rsc": "0.5.34",
     "eslint": "10.10.0",
