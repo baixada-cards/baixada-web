@@ -1,29 +1,30 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import test from "node:test";
+import test, { after, before } from "node:test";
+import { createTestHarness } from "wrangler";
+
+// Exercise the generated Worker in workerd, including cloudflare: imports.
+const server = createTestHarness({
+  workers: [{ configPath: new URL("../dist/server/wrangler.json", import.meta.url) }],
+});
+
+before(async () => {
+  await server.listen();
+});
+
+after(async () => {
+  await server.close();
+});
 
 async function render(pathname = "/") {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-
-  return worker.fetch(
-    new Request(`https://baixada.cards${pathname}`, {
+  return server.fetch(
+    `https://baixada.cards${pathname}`, {
       headers: {
         accept: "text/html",
         host: "baixada.cards",
         "x-forwarded-host": "baixada.cards",
         "x-forwarded-proto": "https",
       },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
     },
   );
 }
