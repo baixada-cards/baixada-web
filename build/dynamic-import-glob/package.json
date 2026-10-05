@@ -1,0 +1,10 @@
+{
+  "name": "@baixada-cards/dynamic-import-glob",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "tinyglobby": "0.2.17"
+  },
+  "type": "module"
+}
