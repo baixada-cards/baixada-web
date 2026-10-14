@@ -18,38 +18,39 @@
   },
   "dependencies": {
     "@baixada-cards/design-system": "git+https://github.com/baixada-cards/design-system.git#82638b7cdabbb56a4bce7b953e8571847bf6fda9",
-    "next": "16.3.6",
+    "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.62.0",
+    "@cloudflare/vite-plugin": "1.63.0",
     "@eslint/js": "10.0.1",
-    "@types/node": "22.20.4",
+    "@types/node": "22.20.5",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
-    "@vitejs/plugin-react": "6.1.1",
+    "@vitejs/plugin-react": "6.1.2",
     "@vitejs/plugin-rsc": "0.5.35",
-    "eslint": "10.11.0",
+    "eslint": "10.12.0",
     "react-server-dom-webpack": "19.3.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.71.0",
-    "vinext": "1.0.0",
-    "vite": "8.3.1",
-    "wrangler": "4.143.0",
+    "typescript-eslint": "8.71.1",
+    "vinext": "1.0.1",
+    "vite": "8.3.3",
+    "wrangler": "4.148.0",
     "fast-glob": "file:build/dynamic-import-glob"
   },
   "overrides": {
     "nanoid": "3.3.18",
     "postcss": "8.5.23",
-    "sharp": "0.35.4",
+    "sharp": "0.35.5",
     "undici": "7.29.1",
     "brace-expansion": "5.0.12",
     "fast-uri": "3.1.8",
     "fflate": "0.7.5",
     "vite-plugin-dynamic-import": {
       "fast-glob": "$fast-glob"
-    }
+    },
+    "source-map-js": "1.2.2"
   },
   "type": "module",
   "packageManager": "npm@11.19.1"
